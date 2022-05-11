@@ -1,0 +1,13 @@
+
+body{
+    background-color: thistle;
+}
+h1{
+    color:wheat;
+}
+.background{
+    width: 1000px;
+    height: 500px;
+    background-image: "images/jungle.jpg";
+}
+
