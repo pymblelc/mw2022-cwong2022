@@ -201,3 +201,54 @@ $('#btnSearch').click(function(){
     console.log(password);
     getCat(url, apikey, username, password);
 })
+
+//addcomment to DB 
+function addComment(item, url, apikey){
+    var settings = {
+        "async": true,
+        "crossDomain": true,
+        "url": url,
+        "method": "POST",
+        "headers": {
+            "content-type": "application/json",
+            "x-apikey": apikey,
+            "cache-control": "no-cache"
+        },
+        "processData": false,
+        "data": JSON.stringify(item)
+    }
+    
+    $.ajax(settings).done(function (response) {
+        console.log('Item successfully added');
+        console.log(response);
+    });
+
+}
+
+function getAnimal(itemID, url, apikey){
+    var serviceURL = url + itemID;
+    var settings = {
+        "async": true,
+        "crossDomain": true,
+        "url": serviceURL,
+        "method": "GET",
+        "headers": {
+            "content-type": "application/json",
+            "x-apikey": apikey,
+            "cache-control": "no-cache"
+        }
+    }
+    
+    $.ajax(settings).done(function (response) {
+        console.log('Item successfully retrieved');
+        console.log(response);
+    });
+
+}
+
+$('#btnComment').click(function(){
+    console.log('submitted');
+    var tempItem = {Name: $('#Name').val(),AnimalType: $('#AnimalType').val(), 
+    Description: $('#Description').val(), ImgURL: $('#ImgURL').val()};
+    addAnimal(tempItem, url, apikey);
+})
