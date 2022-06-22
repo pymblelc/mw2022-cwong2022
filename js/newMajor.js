@@ -11,11 +11,14 @@ window.onload = () => {
     button.addEventListener("click", calculateBMI);
 };
 */
+var apikey = '61a3fa9b34abfc7f972efc08';
+var url = 'https://cwong2022-aba2.restdb.io/rest/majorproject';
+
 var apikey2 = '61a3fa9b34abfc7f972efc08';
 var url2 = 'https://cwong2022-aba2.restdb.io/rest/catdata';
 
-var apikey = '61a3fa9b34abfc7f972efc08';
-var url = 'https://cwong2022-aba2.restdb.io/rest/majorproject';
+var apikey3 = "61a3fa9b34abfc7f972efc08";
+var url3 ='https://cwong2022-aba2.restdb.io/rest/chatboard';
 
 $('#calContainer').hide();
 $('#registerContainer').hide();
@@ -214,3 +217,69 @@ $('#btnSearch').click(function(){
     console.log(password);
     getCat(url, apikey, username, password);
 })
+
+// on websocket open:
+websocket.onopen = function() {
+	MessageAdd('<div class="message green">You have entered the chat room.</div>');
+};
+
+// on websocket close:
+websocket.onclose = function() {
+	MessageAdd('<div class="message blue">You have been disconnected.</div>');
+};
+
+// on websocket error:
+websocket.onerror = function() {
+	MessageAdd('<div class="message red">Connection to chat failed.</div>');
+};
+
+websocket.onmessage = function(event) {
+	var data = JSON.parse(event.data);
+
+	if (data.type == "message") {
+		MessageAdd('<div class="message">' + data.username + ': ' + data.message + '</div>');
+ 	}
+};
+
+function chatForm(){
+    document.getElementById("chatForm").addEventListener("Comment", function() {
+        event.preventDefault();
+    
+        var message_element = document.getElementsByTagName("input")[0];
+        var message = message_element.value;
+    
+        if (message.toString().length) {
+            var username = localStorage.getItem("username");
+    
+            var data = {
+                type: "message",
+                username: username,
+                message: message
+            };
+    
+            websocket.send(JSON.stringify(data));
+            message_element.value = "";
+        }
+    }, false);
+}
+
+function Username() {
+	var username = window.prompt("Enter your username:", "");
+
+	if (username.toString().length > 2) {
+		localStorage.setItem("username", username);
+	}
+	else {
+		alert("Your username must be at least two characters.");
+		Username();
+	}
+}
+
+Username();
+
+function MessageAdd(message) {
+	var chatMsg = document.getElementById("chatMsg");
+
+	chatMsg.insertAdjacentHTML("beforeend", message);
+	chatMsg.scrollTop = chat_messages.scrollHeight;
+}
