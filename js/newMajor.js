@@ -20,6 +20,8 @@ var url2 = 'https://cwong2022-aba2.restdb.io/rest/catdata';
 var apikey3 = "61a3fa9b34abfc7f972efc08";
 var url3 ='https://cwong2022-aba2.restdb.io/rest/chatboard';
 
+var arrLogin = [''];
+
 $('#calContainer').hide();
 $('#registerContainer').hide();
 $('#breedContainer').hide(); 
@@ -58,7 +60,7 @@ $('#user').click(function(){
     visible ='d';
 });
 
-$('#chatBoard').click(function(){
+$('#chatboard').click(function(){
     $('#chatContainer').show()
     $('#calContainer').hide();
     $('#registerContainer').hide();
@@ -217,69 +219,57 @@ $('#btnSearch').click(function(){
     console.log(password);
     getCat(url, apikey, username, password);
 })
+getComments(url, apikey);
+console.log(arrLogin);
 
-// on websocket open:
-websocket.onopen = function() {
-	MessageAdd('<div class="message green">You have entered the chat room.</div>');
-};
-
-// on websocket close:
-websocket.onclose = function() {
-	MessageAdd('<div class="message blue">You have been disconnected.</div>');
-};
-
-// on websocket error:
-websocket.onerror = function() {
-	MessageAdd('<div class="message red">Connection to chat failed.</div>');
-};
-
-websocket.onmessage = function(event) {
-	var data = JSON.parse(event.data);
-
-	if (data.type == "message") {
-		MessageAdd('<div class="message">' + data.username + ': ' + data.message + '</div>');
- 	}
-};
-
-function chatForm(){
-    document.getElementById("chatForm").addEventListener("Comment", function() {
-        event.preventDefault();
-    
-        var message_element = document.getElementsByTagName("input")[0];
-        var message = message_element.value;
-    
-        if (message.toString().length) {
-            var username = localStorage.getItem("username");
-    
-            var data = {
-                type: "message",
-                username: username,
-                message: message
-            };
-    
-            websocket.send(JSON.stringify(data));
-            message_element.value = "";
+function getComments(url, apikey){
+    var settings = {
+        "async": true,
+        "crossDomain": true,
+        "url": url,
+        "method": "GET",
+        "headers": {
+            "content-type": "application/json",
+            "x-apikey": apikey,
+            "cache-control": "no-cache"
         }
-    }, false);
+    }
+    
+    $.ajax(settings).done(function (response) {
+        console.log("commentMsg");
+            //console.log(response[i].Name);
+           arrLogin = response;
+    });
+}
+function addComments(item, url, apikey){
+    var settings = {
+        "async": true,
+        "crossDomain": true,
+        "url": url,
+        "method": "POST",
+        "headers": {
+            "content-type": "application/json",
+            "x-apikey": apikey,
+            "cache-control": "no-cache"
+        },
+        "processData": false,
+        "data": JSON.stringify(item)
+    }
+    
+    $.ajax(settings).done(function (response) {
+        console.log('Item successfully added');
+        console.log(response);
+    });
+
 }
 
-function Username() {
-	var username = window.prompt("Enter your username:", "");
-
-	if (username.toString().length > 2) {
-		localStorage.setItem("username", username);
-	}
-	else {
-		alert("Your username must be at least two characters.");
-		Username();
-	}
-}
-
-Username();
-
-function MessageAdd(message) {
-	var chatMsg = document.getElementById("chatMsg");
-
-	chatMsg.insertAdjacentHTML("beforeend", message);
-	chatMsg.scrollTop = chat_messages.scrollHeight;
-}
+$('#btnPost').click(function(){
+    console.log('Posting');
+    var username = $('#usernameCM').val()
+    var password = $('#comment').val()  
+    console.log(username);
+    console.log(password);
+    $('#test1').text(username);
+    getCat(url, apikey, username, password);
+    console.log(arrLogin);
+})
