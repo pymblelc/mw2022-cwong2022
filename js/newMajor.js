@@ -17,15 +17,12 @@ var url = 'https://cwong2022-aba2.restdb.io/rest/majorproject';
 var apikey2 = '61a3fa9b34abfc7f972efc08';
 var url2 = 'https://cwong2022-aba2.restdb.io/rest/catdata';
 
-var apikey3 = "61a3fa9b34abfc7f972efc08";
-var url3 ='https://cwong2022-aba2.restdb.io/rest/chatboard';
-
 var arrLogin = [''];
 
 $('#calContainer').hide();
 $('#registerContainer').hide();
 $('#breedContainer').hide(); 
-$('#chatContainer').hide(); 
+$('#chatContainer').hide();
 
 $('#createAccount').click(function(){
     $('#createAccount').hide();
@@ -219,29 +216,9 @@ $('#btnSearch').click(function(){
     console.log(password);
     getCat(url, apikey, username, password);
 })
-getComments(url, apikey);
-console.log(arrLogin);
 
-function getComments(url, apikey){
-    var settings = {
-        "async": true,
-        "crossDomain": true,
-        "url": url,
-        "method": "GET",
-        "headers": {
-            "content-type": "application/json",
-            "x-apikey": apikey,
-            "cache-control": "no-cache"
-        }
-    }
-    
-    $.ajax(settings).done(function (response) {
-        console.log("commentMsg");
-            //console.log(response[i].Name);
-           arrLogin = response;
-    });
-}
-function addComments(item, url, apikey){
+//chatboard testing 
+function addComment(item, url, apikey){
     var settings = {
         "async": true,
         "crossDomain": true,
@@ -262,14 +239,49 @@ function addComments(item, url, apikey){
     });
 
 }
+function getComment(itemID, url, apikey){
+    var serviceURL = url + itemID;
+    var settings = {
+        "async": true,
+        "crossDomain": true,
+        "url": serviceURL,
+        "method": "GET",
+        "headers": {
+            "content-type": "application/json",
+            "x-apikey": apikey,
+            "cache-control": "no-cache"
+        }
+    }
+    
+    $.ajax(settings).done(function (response) {
+        console.log('Item successfully retrieved');
+        console.log(response);
+    });
 
-$('#btnPost').click(function(){
-    console.log('Posting');
-    var username = $('#usernameCM').val()
-    var password = $('#comment').val()  
-    console.log(username);
-    console.log(password);
-    $('#test1').text(username);
-    getCat(url, apikey, username, password);
-    console.log(arrLogin);
-})
+}
+
+function searchUser(listOFCat,username,password){
+    var matched = false;
+    var catBreed = '';
+    for(var i=0; i<listOFCat.length; i++){     
+        // match the account details and return cat details   
+        if(username === listOFCat[i].UserName && password === listOFCat[i].Password && isNaN(username) && isNaN(password)){
+        //    var catItem = '<div class="cat" id="' + listOFCat[i]._id + '"><img class="animalImg" src="' + listOFCat[i].ImgURL +'">'+ listOFCat[i].CatBreed + "</div>";
+        //    $("body").append(catItem);
+        document.getElementById('InputUsername').innerHTML = '<text calss="username" value="' ;
+        document.getElementById('InputPassword').innerHTML = "<h2> : "  + '<text calss="commentMsg" text="'
+
+        getComment(commentMsg);
+        console.log("matched");
+        matched = true;
+
+        }
+    }
+
+    if (!matched){
+        document.getElementById('catInfo').innerHTML = "<h2>No match please register above</h2>";
+        document.getElementById('catPic').innerHTML = "";
+        document.getElementById('catSick').innerHTML = "";
+    }
+
+}
