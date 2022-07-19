@@ -44,6 +44,7 @@ $('#FBMIcal').click(function(){
     $('#existedUser').hide(); 
     $('#registerContainer').hide();
     $('#breedContainer').hide(); 
+    $('#chatContainer').hide();
     visible ='c';
 });
 
@@ -170,7 +171,7 @@ function searchCat(listOFCat,username,password){
     }
 
     if (!matched){
-        document.getElementById('catInfo').innerHTML = "<h2>No match please register above</h2>";
+        document.getElementById('catInfo').innerHTML = "<h2>No match please try again or register above</h2>";
         $('#registerContainer').show();
         document.getElementById('catPic').innerHTML = "";
         document.getElementById('catSick').innerHTML = "";
@@ -279,7 +280,8 @@ function searchUser(listOFCat,username,password){
     }
 
     if (!matched){
-        document.getElementById('catInfo').innerHTML = "<h2>No match please register above</h2>";
+        document.getElementById('catInfo').innerHTML = "<h2>No match please try again or register below</h2>";
+
         document.getElementById('catPic').innerHTML = "";
         document.getElementById('catSick').innerHTML = "";
     }

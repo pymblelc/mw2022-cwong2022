@@ -26,6 +26,12 @@ h1{
     border-radius: 15px;
 }
 
+#catGif{
+    position: absolute;
+    left: 230px;
+    top: 18px;
+}
+
 #calContainer{
     position: absolute;
 }
@@ -39,14 +45,18 @@ h1{
 }
 
 #existedUser{
+    max-height: 130px; 
+    width: 140px;
     position: inherit;
-    top: 130px;
-    left: 160px;
+    top: 150px;
+    left: 200px;
 }
 
 #createAccount{
+    max-height: 130px;
+    width: 140px;
     position: inherit;
-    top: 130px;
+    top: 150px;
     left: 30px;
 }
 
