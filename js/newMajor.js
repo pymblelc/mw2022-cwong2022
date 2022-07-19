@@ -17,6 +17,9 @@ var url = 'https://cwong2022-aba2.restdb.io/rest/majorproject';
 var apikey2 = '61a3fa9b34abfc7f972efc08';
 var url2 = 'https://cwong2022-aba2.restdb.io/rest/catdata';
 
+var apikey3 = '61a3fa9b34abfc7f972efc08';
+var url3 = 'https://cwong2022-aba2.restdb.io/rest/chatboard';
+
 var arrLogin = [''];
 
 $('#calContainer').hide();
@@ -235,7 +238,7 @@ function addComment(item, url, apikey){
     }
     
     $.ajax(settings).done(function (response) {
-        console.log('Item successfully added');
+        console.log('Message successfully added');
         console.log(response);
     });
 
@@ -271,7 +274,6 @@ function searchUser(listOFCat,username,password){
         //    $("body").append(catItem);
         document.getElementById('InputUsername').innerHTML = '<text calss="username" value="' ;
         document.getElementById('InputPassword').innerHTML = "<h2> : "  + '<text calss="commentMsg" text="'
-
         getComment(commentMsg);
         console.log("matched");
         matched = true;
@@ -281,9 +283,21 @@ function searchUser(listOFCat,username,password){
 
     if (!matched){
         document.getElementById('catInfo').innerHTML = "<h2>No match please try again or register below</h2>";
-
+        $('#createAccount').show;
         document.getElementById('catPic').innerHTML = "";
         document.getElementById('catSick').innerHTML = "";
     }
 
+$('#btnPost').click(function(){
+    console.log('Posting');
+    var tempItem = {UserName: $('#Name').val(), Password: $('#pw').val(), Comment: $('#comment').val()};
+    addUser(tempItem, url, apikey);
+
+    var username = $('#InputUsername').val()
+    var password = $('#InputPassword').val()   
+    console.log(username);
+    console.log(password);
+    getComment(url, apikey, username, comment);
+    })
 }
+
