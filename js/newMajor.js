@@ -70,6 +70,7 @@ $('#chatboard').click(function(){
     $('#existedUser').hide();
     $('#createAccount').hide();
     visible ='e';
+    getComment(url,apikey);
 });
 
 function calculateFBMI(ribCage, legLength) {
@@ -268,7 +269,7 @@ function getComment(itemID, url, apikey){
             if(response[i].Breed === catBreed){
             document.getElementById('User').innerHTML = response[i].user  + ":" + response[i].commentMsg;
             userFound = true;
-            
+
             }
         }
         if (!userFound){
@@ -298,8 +299,6 @@ function searchUser(listOFCat,username,password){
 $('#btnPost').click(function(){
     console.log('Posting');
     var tempItem = {UserName: $('#Name').val(), Password: $('#pw').val(), Comment: $('#comment').val()};
-    addUser(tempItem, url, apikey);
-
     var username = $('#InputUsername').val()
     var password = $('#InputPassword').val()   
     console.log(username);

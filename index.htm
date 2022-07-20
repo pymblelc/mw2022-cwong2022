@@ -75,7 +75,11 @@
                         <div> Comment: <textarea name="textareaCM" id="comment" cols="15" rows="3" 
                             placeholder="Leave a message" maxlength="60" target="_blank"></textarea>
                         </div>
-                        
+                        <div id="displayArea"> 
+                            <script>
+                                addUser(tempItem, url, apikey);
+                            </script>
+                        </div>
                         <button id="btnPost">Post</button>
                     </div>
 
@@ -83,7 +87,7 @@
                     <div id="menubar"> 
                         <button id="FBMIcal">FBMI cal</button>
                         <button id="chatboard">Chatroom</button>
-                        <button id="user">user</button>
+                        <button id="user">User</button>
                     </div>
 
                         <script type="text/javascript" src="js/newMajor.js"></script>
