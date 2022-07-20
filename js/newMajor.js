@@ -31,6 +31,7 @@ $('#createAccount').click(function(){
     $('#createAccount').hide();
     $('#existedUser').hide();
     $('#registerContainer').show();
+    registerContainer.style.top= "120px"; 
     visible ='a';
 });
 
@@ -174,8 +175,9 @@ function searchCat(listOFCat,username,password){
     }
 
     if (!matched){
-        document.getElementById('catInfo').innerHTML = "<h2>No match please try again or register above</h2>";
+        document.getElementById('catInfo').innerHTML = "<h2>No match please try again or register below </h2></br> ";
         $('#registerContainer').show();
+        registerContainer.style.top = '300px'; 
         document.getElementById('catPic').innerHTML = "";
         document.getElementById('catSick').innerHTML = "";
     }
@@ -219,6 +221,7 @@ $('#btnSearch').click(function(){
     console.log(username);
     console.log(password);
     getCat(url, apikey, username, password);
+    $('#registerContainer').hide();
 })
 
 //chatboard testing 
@@ -258,9 +261,21 @@ function getComment(itemID, url, apikey){
     }
     
     $.ajax(settings).done(function (response) {
-        console.log('Item successfully retrieved');
-        console.log(response);
-    });
+        console.log("Comment");
+        var userFound = false;
+        //match the cat breed and return the potential sickness
+        for(var i=0; i<response.length; i++){           
+            if(response[i].Breed === catBreed){
+            document.getElementById('User').innerHTML = response[i].user  + ":" + response[i].commentMsg;
+            userFound = true;
+            
+            }
+        }
+        if (!userFound){
+            document.getElementById('User').innerHTML = "<h2>password or usernemt is not matching</h2>";
+        }
+
+    });  
 
 }
 
@@ -272,20 +287,12 @@ function searchUser(listOFCat,username,password){
         if(username === listOFCat[i].UserName && password === listOFCat[i].Password && isNaN(username) && isNaN(password)){
         //    var catItem = '<div class="cat" id="' + listOFCat[i]._id + '"><img class="animalImg" src="' + listOFCat[i].ImgURL +'">'+ listOFCat[i].CatBreed + "</div>";
         //    $("body").append(catItem);
-        document.getElementById('InputUsername').innerHTML = '<text calss="username" value="' ;
-        document.getElementById('InputPassword').innerHTML = "<h2> : "  + '<text calss="commentMsg" text="'
-        getComment(commentMsg);
-        console.log("matched");
         matched = true;
-
         }
     }
 
     if (!matched){
-        document.getElementById('catInfo').innerHTML = "<h2>No match please try again or register below</h2>";
-        $('#createAccount').show;
-        document.getElementById('catPic').innerHTML = "";
-        document.getElementById('catSick').innerHTML = "";
+        document.getElementById('User').innerHTML = "<h2>No match please try again or register below";
     }
 
 $('#btnPost').click(function(){
@@ -300,4 +307,18 @@ $('#btnPost').click(function(){
     getComment(url, apikey, username, comment);
     })
 }
+
+
+
+//filter bad-words 
+var filterWords = ["fool", "dumb"];
+// "i" is to ignore case and "g" for global
+var rgx = new RegExp(filterWords.join(""), "gi");
+
+function wordFilter(str) {          
+return str.replace(rgx, "****");           
+}
+//run function 
+wordFilter()
+
 

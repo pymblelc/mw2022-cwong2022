@@ -24,6 +24,7 @@ h1{
 #btnRefresh{
     position: inherit;
     border-radius: 15px;
+    border-radius: 15px;
 }
 
 #catGif{
@@ -61,20 +62,47 @@ h1{
 }
 
 #menubar{
-    top: 630px;
+    top: 610px;
+    left: 7px;
     width: 414px;
-    height: 10vh;
+    height: 100px;
     bottom: 0px;
     border: 1px;
     border-radius: 20px;
-    position: inherit;
+    position: absolute;
     background-color: pink;
+}
+
+#FBMIcal{
+    border-radius: 15px;
+    padding: 10px;
+    width: 100px;
+    height: 50px;
+    left: 30px;
+}
+
+#chatboard{
+    border-radius: 15px;
+    padding: 10px;
+    width: 100px;
+    height: 50px;
+    left: 30px;
+}
+
+#user{
+    border-radius: 15px;
+    padding: 10px;
+    width: 100px;
+    height: 50px;
+    left: 30px;
 }
 
 .animalImg{
     max-width: 200px;
 }
 
-.btnPost{
+#btnPost{
     border-radius: 5px ;
+    border-radius: 15px;
+    padding: 10px;
 }
