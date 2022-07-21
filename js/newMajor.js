@@ -97,14 +97,26 @@ function calculateFBMI(ribCage, legLength) {
         document.getElementById('result').innerHTML = fbmi;   
         
         // Dividing as per the bmi conditions
-        if (fbmi < 15) 
-            document.getElementById('commend').innerHTML = "Under Weight";  
-        else if (fbmi >= 15 && fbmi < 29.9)             
+        if (fbmi < 15){
+            document.getElementById('commend').innerHTML = "Under Weight";
+            document.querySelector("#arrowImg").style.transform = "rotate(-90deg)";
+            $('arrowImg').animate({},registerContainer.style.top= "220px", registerContainer.style.left= "80px");
+            arrow.play();
+        }  
+        else if (fbmi >= 15 && fbmi < 29.9){
             document.getElementById('commend').innerHTML = "Normal";
-        else if (fbmi >= 30 && fbmi < 41.0 )             
-            document.getElementById('commend').innerHTML = "Over weight";        
-        else if (fbmi >= 42)
+        }             
+        else if (fbmi >= 30 && fbmi < 41.0 ){
+            document.getElementById('commend').innerHTML = "Over weight";
+            document.querySelector("#arrowImg").style.transform = "rotate(90deg)";
+        }        
+        else if (fbmi >= 42){
             document.getElementById('commend').innerHTML = "Obese"; 
+            document.querySelector("#arrowImg").style.transform = "rotate(90deg)";
+            
+            $('arrowImg').animate({},registerContainer.style.top= "220px", registerContainer.style.left= "190px");
+            arrow.play();
+        }
     }
 }
 
@@ -319,5 +331,3 @@ return str.replace(rgx, "****");
 }
 //run function 
 wordFilter()
-
-

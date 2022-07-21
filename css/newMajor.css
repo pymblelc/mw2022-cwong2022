@@ -41,6 +41,25 @@ h1{
     position: absolute;
 }
 
+#arrowImg{
+    top: 190px;
+    position: inherit;
+    left: 135px;
+}
+
+#result{
+    position: inherit;
+    position: inherit;
+    left: 80px;
+    top: 280px;
+}
+
+#commend{
+    position: inherit;
+    top: 260px;
+    left: 130px;
+}
+
 #registerContainer{
     position: absolute;
 }
