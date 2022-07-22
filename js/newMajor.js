@@ -70,7 +70,7 @@ $('#chatboard').click(function () {
     $('#existedUser').hide();
     $('#createAccount').hide();
     visible = 'e';
-    getComment(url, apikey);
+    getComment();
 });
 
 function calculateFBMI(ribCage, legLength) {
@@ -264,16 +264,15 @@ function addComment(item, url, apikey) {
 
 }
 //get comment data from DB
-function getComment(url, apikey) {
-    var serviceURL = url;
+function getComment() {
     var settings = {
         "async": true,
         "crossDomain": true,
-        "url": serviceURL,
+        "url": url3,
         "method": "GET",
         "headers": {
             "content-type": "application/json",
-            "x-apikey": apikey,
+            "x-apikey": apikey3,
             "cache-control": "no-cache"
         }
     }
@@ -284,20 +283,7 @@ function getComment(url, apikey) {
         var userFound = false;
         //match the user and retuen comment posted
         for (var i = 0; i < response.length; i++) {
-            document.getElementById("displayComment").innerHTML += "<p>" + response[i].displayComment + "</p>";
-            //username and password match
-            // if ($('#chatName').val() == $('#chatPW').val()) {
-            //     document.getElementById('user').innerHTML = response[i].user + ":" + response[i].commentMsg;
-            //     userFound = true;
-            // }
-            if (userName === response[i].UserName && passWord === response[i].Password && isNaN(userName) && isNaN(passWord)){
-                dispalyArea= displayUser + displayComment 
-                document. getElementById('displayUser').innerHTML += "<p>" + response[i].userName + ":"; 
-                document.getElementById('displayComment').innerHTML += + response[i].userComment + "</p>";
-
-                //document. getElementById('displayArea').innerHTML += "<p>" + response[i].displayUser + response[i].displayComment + "</p>";
-                userFound = true;
-            };
+            document.getElementById("displayComment").innerHTML += "<p>" + response[i].username + ": " + response[i].comment + "</p>";
         }
         // if (!userFound) {
         //     document.getElementById('user').innerHTML = "<h2>password or usernames is not matching</h2>";
@@ -314,7 +300,7 @@ $('#btnPost').click(function (){
     var userName = $('#chatName').val();
     var passWord = $('#chatPW').val();
     console.log(userName, passWord);
-    getComment(url, apikey, userName, passWord); 
+    getComment(); 
 });
 
 
@@ -328,7 +314,7 @@ function searchUser(listOFCat, username, password) {
         console.log(username);
         // match the account details and return cat details   
         if (userName === listOFCat[i].UserName && passWord === listOFCat[i].Password && isNaN(username) && isNaN(password)) {
-            addComment(userItem); 
+            addComment(userItem, url3, apikey);
             //var userItem = ''; 
             $("displayArea").append(userItem);
             matched = true;v
@@ -341,19 +327,18 @@ function searchUser(listOFCat, username, password) {
 
     $('#btnPost').click(function () {
         console.log('Posting');
-        searchUser();
+        // searchUser();
         var tempItem = { 
-            "UserName": $('#chatName').val(), 
-            "Password": $('#chatPW').val(), 
+            "username": $('#chatName').val(), 
             "comment": $('#comment').val() 
         };
-        addComment(tempItem, url, apikey);
+        addComment(tempItem, url3, apikey);
         var username = $('#InputUsername').val()
         var password = $('#InputPassword').val()
         console.log(username);
         console.log(password);
         console.log(comment);
-        getComment(url, apikey);
+        getComment();
     })
 }
 
