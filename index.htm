@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+    <html>
+        <script src="https://cwong2022-aba2.restdb.io/rest/_jsapi.js"></script>
+            <head>
+                <title>Cat App</title>
+                    <link rel="stylesheet" href="css/newMajor.css">
+                     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+                         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js" integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30=" crossorigin="anonymous"></script>
+            </head>
+            
+            <body>
+                <div id="Screen">
+                    <h1>Cat App</h1>
+
+                    <div id="catGif" >
+                        <img src="images/cat.gif" + width="150px">
+                    </div>
+
+                    <div>
+                        <button id="btnRefresh" onClick="window.location.reload();">Refresh Page</button>
+                    </div>
+
+                    <div id="calContainer" class="calContainer">
+                        <p>Rib Cage Circumference (in cm)</p>
+                        <input type="text" name="ribCage" id="ribCage">
+                        <p>Leg Length (in cm)</p>
+                        <input type="text" name="legLegth" id="legLegth">
+                        
+                        <button onclick="calculateFBMI(document.getElementById('ribCage').value,document.getElementById('legLegth').value)" id="btn">Calculate</button>
+                        <div id="result"></div>
+                        <div id="commend"></div>
+                        <div id="valueImg">
+                            <img src="images/value.png" + width="300px">
+                        </div>
+                        <div id="arrowImg">
+                            <img src="images/arrow.png" + width="30px">
+                        </div>
+                    </div>
+
+                    <div id="registerContainer">
+                        <div id="breed" class="breed">
+                            <h1>Add for Cats details and Create User</h1>           
+                        </div>
+                
+                        <div>Image URL: <input id="ImgURL" type="text"></div>
+                        <div>User Name: <input id="regisName" type="text" placeholder="Enter your name"/></div>
+                        <div>Password:  <input id="regisPW" type="password"/> </div>
+                        <div>Cat Breed: <input id="Breed"></textarea></div>
+                        
+                        <div><button id="btnRegister">Register</button></div>
+                    </div>
+                
+                    <div id="breedContainer" class="breedContainer">
+                        <div id="breed" class="breed">
+                            <h1>Login Below :D </h1>           
+                        </div>
+                    
+                        <div>User Name: <input id="InputUsername" type="text" placeholder="Enter your name"/></div>
+                        <div>Password:  <input id="InputPassword" type="password"/> </div>
+                    
+                        
+                        <div><button id="btnSearch">Search</button></div>
+                        
+                        <div id="catPic" ></div>
+                        <div id="catInfo"></div>
+                        <div id="catSick"></div>
+                    </div>
+
+                    <button id="existedUser"><img src="images/existedUser.png" + width='115px'>
+                        <p id="existUserTitle">Existing User</p>
+                    </button>
+                
+                    <button id="createAccount"><img src="images/createAccount.png" + width='100px'>
+                        <p id="createAccTitle">First time here?</p>
+                    </button>
+
+                    <div id="chatContainer">
+                        <div>User Name: <input id="chatName" type="text" placeholder="Enter your name"/></div>
+                        <div>Password:  <input id="chatPW" type="password"/> </div>
+                        
+                        <div> Comment: <textarea name="textareaCM" id="comment" cols="15" rows="3" 
+                            placeholder="Leave a message" maxlength="60" target="_blank"></textarea>
+                        </div>
+                        <div id="displayArea"> 
+                            <div id="displayUser"></div>
+                            <div id="displayComment"></div>
+                            <!-- <script>
+                                addUser(tempItem, url, apikey);
+                            </script> -->
+                        </div>
+                        <button id="btnPost">Post</button>
+                    </div>
+
+
+                    <div id="menubar"> 
+                        <button id="FBMIcal">FBMI cal</button>
+                        <button id="chatboard">Chatroom</button>
+                        <button id="user">User</button>
+                    </div>
+
+                        <script type="text/javascript" src="js/newMajor.js"></script>
+
+                    </body>
+                </div>
+
+    </html>

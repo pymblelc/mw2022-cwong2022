@@ -1,0 +1,165 @@
+body{
+    background-color: thistle
+}
+
+#Screen{
+    position: inherit;
+    background-color: rgb(255, 247, 199);
+    margin: 5px;
+    padding: 10px;
+    width: 410px;
+    height: 700px;
+    top: 20;
+    left: 34%;
+    border: solid;
+    border-radius: 20px;
+    position: absolute;
+}
+
+h1{
+    color: rgb(255, 132, 204);
+    font-style: italic;
+}
+
+#btn{
+    background-color: antiquewhite;
+    border-radius: 15px;
+}
+#btnRefresh{
+    position: inherit;
+    border-radius: 15px;
+    background-color: antiquewhite;
+}
+
+#catGif{
+    position: absolute;
+    left: 230px;
+    top: 18px;
+}
+
+#calContainer{
+    position: absolute;
+}
+
+#arrowImg{
+    top: 190px;
+    position: inherit;
+    left: 135px;
+}
+
+#result{
+    position: inherit;
+    position: inherit;
+    left: 80px;
+    top: 280px;
+}
+
+#commend{
+    position: inherit;
+    top: 260px;
+    left: 130px;
+}
+
+#registerContainer{
+    position: absolute;
+}
+
+#breedContainer{
+    position: absolute;
+}
+
+#existedUser{
+    max-height: 130px; 
+    width: 140px;
+    position: inherit;
+    top: 150px;
+    left: 200px;
+    background-color: beige;
+}
+
+#createAccount{
+    max-height: 130px;
+    width: 140px;
+    position: inherit;
+    top: 150px;
+    left: 30px;
+    background-color: beige;
+}
+
+#menubar{
+    top: 610px;
+    left: 7px;
+    width: 414px;
+    height: 100px;
+    bottom: 0px;
+    border: 1px;
+    border-radius: 20px;
+    position: absolute;
+    background-color: pink;
+}
+
+#FBMIcal{
+    border-radius: 15px;
+    padding: 10px;
+    width: 100px;
+    height: 50px;
+    left: 30px;
+    top: 25px;
+    position: inherit;
+    background-color: antiquewhite;
+}
+
+#chatboard{
+    border-radius: 15px;
+    padding: 10px;
+    width: 100px;
+    height: 50px;
+    left: 140px;
+    top: 25px;
+    position: inherit;
+    background-color: antiquewhite;
+}
+
+#chatContainer{
+    position: absolute;
+    top: 140px;
+}
+
+#user{
+    border-radius: 15px;
+    padding: 10px;
+    width: 100px;
+    height: 50px;
+    left: 255px;
+    top: 25px;
+    position: inherit;
+    background-color: antiquewhite;
+}
+
+.animalImg{
+    max-width: 200px;
+}
+
+#btnPost{
+    border-radius: 15px;
+    padding: 5px;
+    position: inherit;
+    left: 220px;
+    top: 60px;
+    background-color: antiquewhite;
+}
+
+#displayArea{
+    width: 400px;
+    height: 370px;
+}
+
+#btnSearch{
+    background-color: antiquewhite;
+    border-radius: 15px;
+}
+
+#btnRegister{
+    background-color: antiquewhite;
+    border-radius: 15px;
+}
