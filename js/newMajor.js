@@ -97,7 +97,7 @@ function calculateFBMI(ribCage, legLength) {
         // Dividing as per the bmi conditions
         if (fbmi < 15) {
             document.getElementById('commend').innerHTML = "Under Weight";
-            //document.querySelector("#arrowImg").style.transform = "rotate(-90deg)";
+            document.querySelector("#arrowImg").style.transform = "rotate(-90deg)";
             $('#arrowImg').animate({ top: "220px", left: "80px", transform: 'rotate(-90deg)' }, 4000);
 
         }
@@ -109,12 +109,13 @@ function calculateFBMI(ribCage, legLength) {
         else if (fbmi >= 30 && fbmi < 41.0) {
             document.getElementById('commend').innerHTML = "Over weight";
             document.querySelector("#arrowImg").style.transform = "rotate(90deg)";
+            $('arrowImg').animate({ top: "220px", left: "190px", transform: 'rotate(90eg)' }, 4000);
+            arrow.play();
         }
         else if (fbmi >= 42) {
             document.getElementById('commend').innerHTML = "Obese";
             document.querySelector("#arrowImg").style.transform = "rotate(90deg)";
-
-            $('arrowImg').animate({ 'arrowImg.style.top': "220px", 'arrowImg.style.left': "190px" }, 4000);
+            $('arrowImg').animate({ top: "220px", left: "190px", transform: 'rotate(90eg)' }, 4000);
             arrow.play();
         }
     }
@@ -240,6 +241,7 @@ $('#btnSearch').click(function () {
 })
 
 //chatboard testing 
+//add comment to DB
 function addComment(item, url, apikey) {
     var settings = {
         "async": true,
@@ -261,6 +263,7 @@ function addComment(item, url, apikey) {
     });
 
 }
+//get comment data from DB
 function getComment(url, apikey) {
     var serviceURL = url;
     var settings = {
@@ -277,45 +280,79 @@ function getComment(url, apikey) {
 
     $.ajax(settings).done(function (response) {
         console.log(response);
+        searchUser(response, userName, passWord); 
         var userFound = false;
         //match the user and retuen comment posted
         for (var i = 0; i < response.length; i++) {
-            if (response[i].comment) {
-                document.getElementById('User').innerHTML = response[i].user + ":" + response[i].commentMsg;
-                userFound = true;
-            }
-        }
-        if (!userFound) {
-            document.getElementById('User').innerHTML = "<h2>password or usernames is not matching</h2>";
-        }
+            document.getElementById("displayComment").innerHTML += "<p>" + response[i].displayComment + "</p>";
+            //username and password match
+            // if ($('#chatName').val() == $('#chatPW').val()) {
+            //     document.getElementById('user').innerHTML = response[i].user + ":" + response[i].commentMsg;
+            //     userFound = true;
+            // }
+            if (userName === response[i].UserName && passWord === response[i].Password && isNaN(userName) && isNaN(passWord)){
+                dispalyArea= displayUser + displayComment 
+                document. getElementById('displayUser').innerHTML += "<p>" + response[i].userName + ":"; 
+                document.getElementById('displayComment').innerHTML += + response[i].userComment + "</p>";
 
+                //document. getElementById('displayArea').innerHTML += "<p>" + response[i].displayUser + response[i].displayComment + "</p>";
+                userFound = true;
+            };
+        }
+        // if (!userFound) {
+        //     document.getElementById('user').innerHTML = "<h2>password or usernames is not matching</h2>";
+        // }
     });
 
 }
 
+var userName = '';
+var passWord = '';
+
+$('#btnPost').click(function (){
+    console.log('Posting');
+    var userName = $('#chatName').val();
+    var passWord = $('#chatPW').val();
+    console.log(userName, passWord);
+    getComment(url, apikey, userName, passWord); 
+});
+
+
+//search user from database 
 function searchUser(listOFCat, username, password) {
     var matched = false;
-    var catBreed = '';
+    var userItem = '';
     for (var i = 0; i < listOFCat.length; i++) {
+        //matchuser and store comment 
+        console.log(listOFCat[i].UserName);
+        console.log(username);
         // match the account details and return cat details   
-        if (username === listOFCat[i].UserName && password === listOFCat[i].Password && isNaN(username) && isNaN(password)) {
-            //    var catItem = '<div class="cat" id="' + listOFCat[i]._id + '"><img class="animalImg" src="' + listOFCat[i].ImgURL +'">'+ listOFCat[i].CatBreed + "</div>";
-            //    $("body").append(catItem);
-            matched = true;
+        if (userName === listOFCat[i].UserName && passWord === listOFCat[i].Password && isNaN(username) && isNaN(password)) {
+            addComment(userItem); 
+            //var userItem = ''; 
+            $("displayArea").append(userItem);
+            matched = true;v
         }
     }
 
-    if (!matched) {
-        document.getElementById('User').innerHTML = "<h2>No match please try again or register below";
-    }
+    // if (!matched) {
+    //     document.getElementById('displayArea').innerHTML = "<h2>No match please try again or register below";
+    // }
 
     $('#btnPost').click(function () {
         console.log('Posting');
-        var tempItem = { UserName: $('#chatName').val(), Password: $('#chatPW').val(), Comment: $('#comment').val() };
+        searchUser();
+        var tempItem = { 
+            "UserName": $('#chatName').val(), 
+            "Password": $('#chatPW').val(), 
+            "comment": $('#comment').val() 
+        };
+        addComment(tempItem, url, apikey);
         var username = $('#InputUsername').val()
         var password = $('#InputPassword').val()
         console.log(username);
         console.log(password);
+        console.log(comment);
         getComment(url, apikey);
     })
 }
@@ -334,26 +371,21 @@ function wordFilter(str) {
 wordFilter("abcd")
 
 //random comment show in display area 
-
 function shuffle(comment) {
-    let currentIndex = comment.length,  randomIndex;
-  
-    // While there remain elements to shuffle.
+    let currentIndex = comment.length, randomIndex;
     while (currentIndex != 0) {
-  
-      // Pick a remaining element.
-      randomIndex = Math.floor(Math.random() * currentIndex);
-      currentIndex--;
-  
-      // And swap it with the current element.
-      [comment[currentIndex], comment[randomIndex]] = [
-        comment[randomIndex], comment[currentIndex]];
+
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex--;
+
+        [comment[currentIndex], comment[randomIndex]] = [
+            comment[randomIndex], comment[currentIndex]];
     }
-  
+
     return comment;
-  }
-  
-  // Used like so
-  var arr = [commentMsg];
-  shuffle(arr);
-  console.log(arr);
+}
+
+// Used like so
+// var arr = [comment];
+// shuffle(arr);
+// console.log(arr);
