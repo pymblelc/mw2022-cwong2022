@@ -109,13 +109,13 @@ function calculateFBMI(ribCage, legLength) {
         else if (fbmi >= 30 && fbmi < 41.0) {
             document.getElementById('commend').innerHTML = "Over weight";
             document.querySelector("#arrowImg").style.transform = "rotate(90deg)";
-            $('arrowImg').animate({ top: "220px", left: "190px", transform: 'rotate(90eg)' }, 4000);
+            $('#arrowImg').animate({ top: "220px", left: "190px", transform: 'rotate(90eg)' }, 4000);
             arrow.play();
         }
         else if (fbmi >= 42) {
             document.getElementById('commend').innerHTML = "Obese";
             document.querySelector("#arrowImg").style.transform = "rotate(90deg)";
-            $('arrowImg').animate({ top: "220px", left: "190px", transform: 'rotate(90eg)' }, 4000);
+            $('#arrowImg').animate({ top: "220px", left: "190px", transform: 'rotate(90eg)' }, 4000);
             arrow.play();
         }
     }
